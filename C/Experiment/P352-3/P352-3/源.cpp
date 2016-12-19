@@ -27,7 +27,7 @@ int main() {
 
 
 	for (int i = 1; i <= 26; i++) {
-		putchar(i%10+'0');
+		printf("%d", i % 10);
 	}
 	printf("*");
 	for (int i = 26; i >= 1; i--) {
@@ -40,11 +40,11 @@ int main() {
 	for (int i = 1; i <= 26; i++) {
 		putchar(i % 10 + '0');
 	}
-	printf("*");
+	putchar('*');
 	for (int i = 26; i >= 1; i--) {
 		putchar(i % 10 + '0');
 	}
-	printf("\n");
+	putchar('\n');
 
 
 	for (char x = 'A'; x <= 'Z'; x++) {
@@ -52,23 +52,23 @@ int main() {
 			if (i <= x - 'A') putchar(x);
 			else putchar(' ');
 		}
-		printf("*");
+		putchar('*');
 		for (int i = 25; i >= 0; i--) {
 			if (i <= x - 'A') putchar(x);
 			else putchar(' ');
 		}
-		printf("\n");
+		putchar('\n');
 	}
 
 
 	for (int i = 1; i <= 26; i++) {
 		putchar(i % 10 + '0');
 	}
-	printf("*");
+	putchar('*');
 	for (int i = 26; i >= 1; i--) {
 		putchar(i % 10 + '0');
 	}
-	printf("\n");
+	putchar('\n');
 
 	system("pause");
 	return 0;
