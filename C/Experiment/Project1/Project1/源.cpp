@@ -92,6 +92,11 @@ int main() {
 		}
 		printf("\n");
 	}
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 3; j++) {
+			free(data[i][j]);
+		}
+	}
 	system("pause");
 	return 0;
 }
