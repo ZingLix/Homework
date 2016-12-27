@@ -12,10 +12,14 @@ int main() {
 		printf("\n");
 	}
 	printf("\nMatrix b:\n");
-	for (int i = 0; i < 2; i++) {
-		for (int j = 0; j < 3; j++) {
+	int i = 0, j = 0;
+	while (i < 2) {
+		j = 0;
+		while (j < 3) {
 			printf("%d ", b[i][j]);
+			j++;
 		}
+		i++;
 		printf("\n");
 	}
 	system("pause");

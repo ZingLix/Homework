@@ -14,7 +14,7 @@ int main() {
 	b = rand() % 6 + 1;
 	printf("You got %d!\n", b);
 	int sum = a + b;
-	printf("The sum is %d\n.", sum);
+	printf("The sum is %d\n", sum);
 	switch (sum)
 	{
 	case 7:printf("You win!\n"); break;

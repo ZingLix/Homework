@@ -38,6 +38,7 @@ int main() {
 	}
 	printf("Mean:%lf\n", GetMean(x, n));
 	printf("Median:%d", GetMedian(x, n));
+	printf("\n");
 	system("pause");
 	return 0;
 }

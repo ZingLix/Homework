@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{915E77B0-CACD-4A13-A070-4BF492F5B125}</ProjectGuid>
-    <RootNamespace>P327Exp64</RootNamespace>
+    <ProjectGuid>{559B5892-CC8F-4887-B9BA-2BE32A5B4934}</ProjectGuid>
+    <RootNamespace>P4364</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

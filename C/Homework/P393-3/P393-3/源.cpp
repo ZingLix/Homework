@@ -41,7 +41,7 @@ int main() {
 		change(name[i], strlen(name[i]));
 		printf("%s\n", name[i]);
 	}
-	printf("Change b:\n");
+	printf("\nChange b:\n");
 	for (int i = 0; i < 4; i++) {
 		All_To_Upper(name[i], strlen(name[i]));
 		printf("%s\n", name[i]);

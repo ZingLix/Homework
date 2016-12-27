@@ -25,14 +25,20 @@ void quick_sort(int *x, int left, int right) {
 
 int main() {
 	srand((unsigned)time(NULL));
-	int x[10000] = { 0 };
-	for (int i = 0; i < 10000; i++) {
-		x[i] = rand() % 10000;
+	int x[20] = { 0 };
+	for (int i = 0; i < 20; i++) {
+		x[i] = rand() % 100;
 	}
-	quick_sort(x, 0, 9999);
-	for (int i = 0; i < 10000; i++) {
-		printf("%d \n", x[i]);
+	printf("Before quicksort:\n");
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", x[i]);
 	}
+	printf("\nAfter quicksort:\n");
+	quick_sort(x, 0, 19);
+	for (int i = 0; i < 20; i++) {
+		printf("%d ", x[i]);
+	}
+	printf("\n");
 	system("pause");
 	return 0;
 }
