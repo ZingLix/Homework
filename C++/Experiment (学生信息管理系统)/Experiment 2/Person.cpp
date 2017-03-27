@@ -5,17 +5,14 @@ int Person::Count = 0;
 Person::Person()
 {
 	ID = 0;
-	Name = "/0";
-	Sex = "/0";
+	Name = "\0";
+	Sex = "\0";
 	Count++;
 }
 
 Person::Person(int id,string strName, string strSex, int y, int m, int d)
 {
-	ID = id;
-	Name = strName;
-	Sex = strSex;
-	Birthday.SetDate(y, m, d);
+	this->SetPerson(id, strName, strSex, y, m, d);
 	Count++;
 }
 
@@ -32,7 +29,12 @@ void Person::Display()
 
 void Person::SetValue()
 {
-	cin >> ID >> Name >> Sex;
+	cout << "学号：";
+	cin >> ID;
+	cout << "姓名：";
+	cin >> Name;
+	cout << "性别：";
+	cin >> Sex;
 	Birthday.SetValue();
 }
 
@@ -46,13 +48,12 @@ int Person::GetID()
 	return ID;
 }
 
-void Person::SetPerson(string strName, string strSex, int y, int m, int d)
+void Person::SetPerson(int id, string strName, string strSex, int y, int m, int d)
 {
-//	ID = id;
+	ID = id;
 	Name = strName;
 	Sex = strSex;
 	Birthday.SetDate(y, m, d);
-	Count++;
 }
 
 Person::~Person()

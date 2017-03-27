@@ -112,11 +112,15 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Person.h" />
+    <ClInclude Include="Student.h" />
     <ClInclude Include="TDate.h" />
+    <ClInclude Include="Teacher.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Person.cpp" />
+    <ClCompile Include="Student.cpp" />
     <ClCompile Include="TDate.cpp" />
+    <ClCompile Include="Teacher.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

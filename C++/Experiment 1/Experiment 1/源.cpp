@@ -2,6 +2,7 @@
 
 int main() {
 	int n;
+	cout << "输入Fibonacci数列行数：";
 	cin >> n;
 	Fibonacci f(n);
 	f.show();

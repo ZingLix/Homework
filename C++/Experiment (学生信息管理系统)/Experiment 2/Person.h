@@ -10,7 +10,7 @@ public:
 	virtual void SetValue();
 	static int GetCount();
 	int GetID();
-	void SetPerson(string strName, string strSex, int y, int m, int d);
+	void SetPerson(int id, string strName, string strSex, int y, int m, int d);
 	~Person();
 
 private:

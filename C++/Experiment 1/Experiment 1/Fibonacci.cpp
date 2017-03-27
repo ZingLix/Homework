@@ -16,7 +16,7 @@ Fibonacci::Fibonacci(int n):n(n)
 		}
 	}
 }
-
+	
 Fibonacci::~Fibonacci()
 {
 	for (int i = 0; i < n; i++) {
