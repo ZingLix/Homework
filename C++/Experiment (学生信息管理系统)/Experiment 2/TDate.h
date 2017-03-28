@@ -1,5 +1,5 @@
 #pragma once
-#ifndef TDATE
+//#ifndef TDATE
 #include <iostream>
 using namespace std;
 class TDate {
@@ -13,4 +13,4 @@ public:
 private:
 	int Year, Month, Day;
 };
-#endif // !TDATE
+//#endif // !TDATE

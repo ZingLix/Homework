@@ -6,10 +6,10 @@ Teacher::Teacher()
 	Dept = "\0";
 }
 
-Teacher::Teacher(int id, string strName, string strSex, int y, int m, int d, string strTitle, string strDept)
+Teacher::Teacher(string strName, string strSex, int y, int m, int d, string strTitle, string strDept)
 //	:Person(id, strName, strSex, y, m, d), Title(strTitle), Dept(strDept)
 {
-	SetTeacher(id, strName, strSex, y, m, d, strTitle, strDept);
+	SetTeacher(strName, strSex, y, m, d, strTitle, strDept);
 }
 
 void Teacher::Display()
@@ -28,9 +28,9 @@ void Teacher::SetValue()
 	cin >> Dept;
 }
 
-void Teacher::SetTeacher(int id, string strName, string strSex, int y, int m, int d, string strTitle, string strDept)
+void Teacher::SetTeacher(string strName, string strSex, int y, int m, int d, string strTitle, string strDept)
 {
-	Person::SetPerson(id, strName, strSex, y, m, d);
+	Person::SetPerson(strName, strSex, y, m, d);
 	Title = strTitle;
 	Dept = strDept;
 }

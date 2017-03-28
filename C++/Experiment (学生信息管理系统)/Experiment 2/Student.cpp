@@ -6,10 +6,10 @@ Student::Student()
 	Grade = "\0";
 }
 
-Student::Student(int id, string strName, string strSex, int y, int m, int d, string strMajor, string strGrade)
+Student::Student(string strName, string strSex, int y, int m, int d, string strMajor, string strGrade)
 	//:Person(id, strName,strSex, y, m, d),Major(strMajor),Grade(strGrade)
 {
-	SetStudent(id, strName, strSex, y, m, d, strMajor, strGrade);
+	SetStudent(strName, strSex, y, m, d, strMajor, strGrade);
 }
 
 void Student::Display()
@@ -28,9 +28,9 @@ void Student::SetValue()
 	cin >> Grade;
 }
 
-void Student::SetStudent(int id, string strName, string strSex, int y, int m, int d, string strMajor, string strGrade)
+void Student::SetStudent(string strName, string strSex, int y, int m, int d, string strMajor, string strGrade)
 {
-	Person::SetPerson(id, strName, strSex, y, m, d);
+	Person::SetPerson(strName, strSex, y, m, d);
 	Major = strMajor;
 	Grade = strGrade;
 }

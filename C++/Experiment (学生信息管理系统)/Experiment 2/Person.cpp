@@ -7,13 +7,13 @@ Person::Person()
 	ID = 0;
 	Name = "\0";
 	Sex = "\0";
-	Count++;
+	ID=++Count;
 }
 
-Person::Person(int id,string strName, string strSex, int y, int m, int d)
+Person::Person(string strName, string strSex, int y, int m, int d)
 {
-	this->SetPerson(id, strName, strSex, y, m, d);
-	Count++;
+	this->SetPerson(strName, strSex, y, m, d);
+	ID=++Count;
 }
 
 void Person::Display()
@@ -29,8 +29,8 @@ void Person::Display()
 
 void Person::SetValue()
 {
-	cout << "学号：";
-	cin >> ID;
+//	cout << "学号：";
+//  cin >> ID;
 	cout << "姓名：";
 	cin >> Name;
 	cout << "性别：";
@@ -48,9 +48,8 @@ int Person::GetID()
 	return ID;
 }
 
-void Person::SetPerson(int id, string strName, string strSex, int y, int m, int d)
+void Person::SetPerson(string strName, string strSex, int y, int m, int d)
 {
-	ID = id;
 	Name = strName;
 	Sex = strSex;
 	Birthday.SetDate(y, m, d);
@@ -59,4 +58,18 @@ void Person::SetPerson(int id, string strName, string strSex, int y, int m, int 
 Person::~Person()
 {
 	Count--;
+}
+
+ostream & operator<<(ostream & oo, Person & obj)
+{
+	obj.Display();
+	return oo;
+	// TODO: 在此处插入 return 语句
+}
+
+istream & operator>>(istream & ii, Person & obj)
+{
+	obj.SetValue();
+	return ii;
+	// TODO: 在此处插入 return 语句
 }
