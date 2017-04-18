@@ -7,9 +7,9 @@ Teacher::Teacher()
 }
 
 Teacher::Teacher(string strName, string strSex, int y, int m, int d, string strTitle, string strDept)
-//	:Person(id, strName, strSex, y, m, d), Title(strTitle), Dept(strDept)
+	:Person(strName, strSex, y, m, d), Title(strTitle), Dept(strDept)
 {
-	SetTeacher(strName, strSex, y, m, d, strTitle, strDept);
+//	SetTeacher(strName, strSex, y, m, d, strTitle, strDept);
 }
 
 void Teacher::Display()
@@ -33,4 +33,16 @@ void Teacher::SetTeacher(string strName, string strSex, int y, int m, int d, str
 	Person::SetPerson(strName, strSex, y, m, d);
 	Title = strTitle;
 	Dept = strDept;
+}
+
+void Teacher::ReadFile(ifstream & InFile)
+{
+	Person::ReadFile(InFile);
+	InFile >> Title >> Dept;
+}
+
+void Teacher::WriteFile(ofstream & OutFile)
+{
+	Person::WriteFile(OutFile);
+	OutFile << Title << " " << Dept;
 }

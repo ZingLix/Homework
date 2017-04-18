@@ -60,6 +60,18 @@ Person::~Person()
 	Count--;
 }
 
+void Person::ReadFile(ifstream & InFile)
+{
+	InFile>>ID >> Name >> Sex;
+	Birthday.ReadFile(InFile);
+}
+
+void Person::WriteFile(ofstream & OutFile)
+{
+	OutFile << ID << " " << Name << " " << Sex << " ";
+	Birthday.WriteFile(OutFile);
+}
+
 ostream & operator<<(ostream & oo, Person & obj)
 {
 	obj.Display();
@@ -72,4 +84,19 @@ istream & operator>>(istream & ii, Person & obj)
 	obj.SetValue();
 	return ii;
 	// TODO: 在此处插入 return 语句
+}
+
+ofstream & operator<<(ofstream & strefile, Person & obj)
+{
+	obj.WriteFile(strefile);
+	strefile << endl;
+	return strefile;
+	// TODO: insert return statement here
+}
+
+ifstream & operator>>(ifstream & strefile, Person & obj)
+{
+	obj.ReadFile(strefile);
+	return strefile;
+	// TODO: insert return statement here
 }

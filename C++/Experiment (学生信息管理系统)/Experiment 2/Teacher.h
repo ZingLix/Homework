@@ -8,6 +8,8 @@ public:
 	virtual void Display();
 	virtual void SetValue();
 	void SetTeacher(string strName, string strSex, int y, int m, int d, string strTitle, string strDept);
+	virtual void ReadFile(ifstream & InFile); //读文件
+	virtual void WriteFile(ofstream & OutFile); //文件保存
 private:
 	string Title;
 	string Dept;

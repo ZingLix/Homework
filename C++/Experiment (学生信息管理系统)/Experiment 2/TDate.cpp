@@ -35,3 +35,13 @@ void TDate::SetValue()
 	cout << "出生日期：";
 	cin >> Day;
 }
+
+void TDate::ReadFile(ifstream & InFile)
+{
+	InFile >> Year >> Month>> Day ;
+}
+
+void TDate::WriteFile(ofstream & OutFile)
+{
+	OutFile << Year << " " << Month << " " << Day << " ";
+}
