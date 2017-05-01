@@ -39,7 +39,7 @@ void main() {
 	//cout << stud<<endl;
 
 	/************************ Experiment 5 ************************/
-	Teacher teach("张山","男",1978,11,11,"讲师","计算机系");
+	Teacher teach("张山", "男", 1978, 11, 11, "讲师", "计算机系");
 	Student stud("李世", "男", 1991, 11, 11, "计算机科学", "2010");
 	cout << teach << endl;
 	cout << stud << endl;
