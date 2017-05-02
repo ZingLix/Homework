@@ -121,6 +121,7 @@
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="TDate.cpp" />
     <ClCompile Include="Teacher.cpp" />
+    <ClCompile Include="T_Student.cpp" />
     <ClCompile Include="源.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

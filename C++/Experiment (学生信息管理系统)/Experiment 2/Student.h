@@ -1,7 +1,7 @@
 #pragma once
 #include "Person.h"
 
-class Student :public Person {
+class Student :virtual public Person {
 public:
 	Student();
 	Student(string strName, string strSex, int y, int m, int d, string strMajor, string strGrade);
