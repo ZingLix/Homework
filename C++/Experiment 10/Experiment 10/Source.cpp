@@ -1,4 +1,4 @@
-#include "SafeArray.cpp"
+#include "SafeArray.h"
 #include <iostream>
 int main() {
 	SafeArray<int, 5> ais;
@@ -12,6 +12,6 @@ int main() {
 	cout << endl;
 	ais.sort();
 	ais.print();
-	cout << endl << ais.find(3);
+	cout << endl << ais.find(2);
 	system("pause");
 }

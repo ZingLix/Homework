@@ -18,9 +18,6 @@
     <ClCompile Include="Source.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="SafeArray.cpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SafeArray.h">
