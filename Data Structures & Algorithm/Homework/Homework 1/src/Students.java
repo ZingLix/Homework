@@ -1,5 +1,6 @@
 public class Students implements Show{
     public Students(){}
+
     public Students(String stu_no,String major){
         this.stu_no=stu_no;
         this.major=major;
