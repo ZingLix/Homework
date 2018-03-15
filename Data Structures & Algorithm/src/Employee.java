@@ -1,4 +1,6 @@
-public class Employee {
+public class Employee implements Show{
+
+
     public Employee(String emp_no,float salary){
         this.emp_no=emp_no;
         this.salary=salary;
@@ -18,6 +20,11 @@ public class Employee {
 
     public void setSalary(float salary){
         this.salary=salary;
+    }
+
+    public void show(){
+        System.out.println("Number: "+emp_no);
+        System.out.println("Salary:"+salary);
     }
 
     private String emp_no;
