@@ -13,7 +13,8 @@ public class Main {
         test.add(5);
         test.add(6);
         test.add(7);
-        test.add(3,9);
+        test.add(8);
+        test.add(9);
         test.print();
         while (!(test.Size()==0)){
             test.removeLast();

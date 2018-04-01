@@ -1,0 +1,38 @@
+# Homework
+- Chapter 1
+  - [x] P26 1.1
+  - [x] Bicycle 
+  - [x] Person ([Detail here](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Homework/CH1%20Person/Requirement.md))
+- Chapter 2
+  - [x] P50 2.7
+- Chapter 3
+  - [ ] P96 3.1 3.2 3.3
+  - [ ] P99 3.21(b)
+  - [ ] P100 3.31 3.32 3.33 
+- Chapter 4
+  - [ ] P160 4.1
+  - [ ] P161 4.2 4.3 4.6 4.8 4.9 4.11
+  - [ ] P163 4.19 4.27 4.28 4.44
+- Chapter 5
+  - [ ] P218 5.1 5.2 5.5
+- Chapter 6
+  - [ ] P263  6.2  6.3  6.5  6.6 
+  - [ ] P264 6.19  6.20 
+  - [ ] P266 6.26 
+- Chapter 7
+  - [ ] P321  7.1  7.4
+  - [ ] p322  7.11  7.15  7.19
+- Chapter 8
+  - [ ] P355 8.1 8.2
+- Chapter 9
+  - [ ] P417 9.1
+  - [ ] P418 9.5 
+  - [ ] P419 9.15
+  - [ ] P420 9.21
+
+# Experiment
+- [x] Exp1: P96 3.4 & 3.5
+- [ ] Exp2: implement a program to evaluate a infix expression
+- [ ] Exp3: P162   4.13
+- [ ] Exp4: P324 7.38
+- [ ] Exp5: P418 9.3
