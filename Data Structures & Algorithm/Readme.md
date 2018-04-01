@@ -2,7 +2,7 @@
 - Chapter 1
   - [x] P26 1.1
   - [x] Bicycle 
-  - [x] Person ([Detail here](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Homework/CH1%20Person/Requirement.md))
+  - [x] Person ([Detail here](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Homework/CH1%20Person/Readme.md))
 - Chapter 2
   - [x] P50 2.7
 - Chapter 3
