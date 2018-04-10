@@ -53,7 +53,10 @@ public class Main {
 
     public static void main(String[] args) {
         String str=new String("{dfi}/*}asdf{*/{[asdf]asdf}");
+        System.out.println("字符串："+str);
+        System.out.println(judge(str));
+        str="{[/*asd*/}]";
+        System.out.println("字符串："+str);
         System.out.print(judge(str));
-
     }
 }
