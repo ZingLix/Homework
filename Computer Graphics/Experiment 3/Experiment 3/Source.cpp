@@ -24,7 +24,7 @@ GLuint lineList;
 
 void KeyPlot(int key, int x, int y) {
 	switch (key) {
-	case GLUT_KEY_UP:{
+	case GLUT_KEY_UP: {
 		degree += 1;
 		break;
 	}
@@ -42,13 +42,8 @@ void KeyPlot(int key, int x, int y) {
 	}
 	default: break;
 	}
-	if (degree > 356.0f)  degree = 0.0f;
-	if (degree < -1.0f)  degree = 355.0f;
-	if (degreeY > 356.0f)  degreeY = 0.0f;
-	if (degreeY < -1.0f)  degreeY = 355.0f;
 
 	glutPostRedisplay();
-
 }
 
 void display(void)
@@ -56,30 +51,28 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glViewport(0, 0, 500, 500);
-
 	glLineWidth(5.0);
 	glColor4f(0.0, 0.6, 1.0, 1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glCallList(lineList);
 
-	glViewport(500, 0,500, 500);
+	glViewport(500, 0, 500, 500);
 	glOrtho(-1.0, 1.0, -1, 1.0, -10, 10);
 	glPushMatrix();
 	glRotatef(degree, 1, 0, 0);
 	glRotatef(degreeY, 0, 1, 0);
-		glColor3f(0.0, 0.0, 0.0);
-		glEnable(GL_POLYGON_STIPPLE);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glPolygonStipple(chess);
-		glCallList(lineList);
-		glRectf(50.0f, 100.0f, 150.0f, 50.0f);
-		glDisable(GL_POLYGON_STIPPLE);
+	glColor3f(0.0, 0.0, 0.0);
+	glEnable(GL_POLYGON_STIPPLE);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glPolygonStipple(chess);
+	glCallList(lineList);
+	glRectf(50.0f, 100.0f, 150.0f, 50.0f);
+	glDisable(GL_POLYGON_STIPPLE);
 	glLineWidth(5.0);
 	glColor4f(0.0, 0.6, 1.0, 1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glCallList(lineList);
 	glPopMatrix();
-
 
 	glFlush();
 	glutSwapBuffers();
@@ -119,7 +112,7 @@ void changeSize(GLsizei w, GLsizei h) {
 int main(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB );
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitWindowSize(1000, 500);
 	glutInitWindowPosition(100, 100);
 	glutCreateWindow("Experiment 3");
