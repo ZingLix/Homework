@@ -1,6 +1,5 @@
 #include <glut.h>
 
-int flag = 2;
 float degree = 0;
 float degreeY = 0;
 GLubyte chess[] = {
@@ -43,23 +42,31 @@ void KeyPlot(int key, int x, int y) {
 	}
 	default: break;
 	}
+	if (degree > 356.0f)  degree = 0.0f;
+	if (degree < -1.0f)  degree = 355.0f;
+	if (degreeY > 356.0f)  degreeY = 0.0f;
+	if (degreeY < -1.0f)  degreeY = 355.0f;
+
 	glutPostRedisplay();
 
 }
 
-float abs(float x) {
-	return x < 0 ? -x : x;
-}
-
 void display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glOrtho(-1.0, 1.0, -1, 1.0, -10, 10);
+	glClear(GL_COLOR_BUFFER_BIT);
 
+	glViewport(0, 0, 500, 500);
+
+	glLineWidth(5.0);
+	glColor4f(0.0, 0.6, 1.0, 1.0);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glCallList(lineList);
+
+	glViewport(500, 0,500, 500);
+	glOrtho(-1.0, 1.0, -1, 1.0, -10, 10);
 	glPushMatrix();
 	glRotatef(degree, 1, 0, 0);
 	glRotatef(degreeY, 0, 1, 0);
-	if (flag == 2) {
 		glColor3f(0.0, 0.0, 0.0);
 		glEnable(GL_POLYGON_STIPPLE);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -67,17 +74,16 @@ void display(void)
 		glCallList(lineList);
 		glRectf(50.0f, 100.0f, 150.0f, 50.0f);
 		glDisable(GL_POLYGON_STIPPLE);
-	}
-
 	glLineWidth(5.0);
 	glColor4f(0.0, 0.6, 1.0, 1.0);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	glCallList(lineList);
 	glPopMatrix();
+
+
 	glFlush();
 	glutSwapBuffers();
 }
-
 
 void Initial() {
 	glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -95,9 +101,6 @@ void Initial() {
 	glVertex3f(2.0, 0.0, 0.0);
 	glEnd();
 	glEndList();
-
-
-
 }
 
 void changeSize(GLsizei w, GLsizei h) {
@@ -113,47 +116,19 @@ void changeSize(GLsizei w, GLsizei h) {
 	glLoadIdentity();
 }
 
-void displayW() {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glEnable(GL_LINE_SMOOTH);
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glLineWidth(12.0);
-	glColor4f(0.0, 0.6, 1.0, 1.0);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glCallList(lineList);
-	glFlush();
-}
-
-
-void ProcessMenu(int value) {
-	flag = value;
-	glutPostRedisplay();
-}
-
 int main(int argc, char* argv[])
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB );
-	glutInitWindowSize(500, 500);
+	glutInitWindowSize(1000, 500);
 	glutInitWindowPosition(100, 100);
-	glutCreateWindow("Experiment 1");
+	glutCreateWindow("Experiment 3");
 	glutReshapeFunc(changeSize);
 	glutDisplayFunc(display);
-	glutCreateMenu(ProcessMenu);
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
-	glutAddMenuEntry("Ïß¿ò", 1);
-	glutAddMenuEntry("Ìî³ä", 2);
 	glutSpecialFunc(KeyPlot);
 	Initial();
 
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
-	glutInitWindowPosition(200, 100);
-	glutCreateWindow("Experiment 1w");
-	glutReshapeFunc(changeSize);
-	glutDisplayFunc(displayW);
-	Initial();
+
 	glutMainLoop();
 	return 0;
 }
