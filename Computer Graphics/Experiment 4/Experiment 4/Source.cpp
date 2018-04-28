@@ -209,9 +209,9 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(display);
 	glutSpecialFunc(KeyPlot);
 	glutCreateMenu(ProcessMenu);
-	glutAddMenuEntry("正视图XOZ (V)", 1);
-	glutAddMenuEntry("侧视图YOZ (W)", 2);
-	glutAddMenuEntry("俯视图XOY (H)", 3);
+	glutAddMenuEntry("姝ｈ鍥綳OZ(V)", 1);
+	glutAddMenuEntry("渚ц鍥綴OZ(W)", 2);
+	glutAddMenuEntry("淇鍥綳OY(H)", 3);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	Initial();
 
