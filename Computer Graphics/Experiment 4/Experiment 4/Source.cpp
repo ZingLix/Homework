@@ -1,12 +1,8 @@
 #include <complex>
-#include <glut.h>
-#include <stdlib.h>  
+#include <glut.h> 
 #include <windows.h>
 
-
-
-float degree = 0;
-float degreeY = 0;
+GLsizei iMode = 3;
 GLubyte chess[] = {
 	0x00,0x00,0xff,0xff,0x00,0x00,0xff,0xff,
 	0x00,0x00,0xff,0xff,0x00,0x00,0xff,0xff,
@@ -27,45 +23,62 @@ GLubyte chess[] = {
 };
 GLuint lineList;
 GLuint coordinate;
-int wid=1000, hei=500;
+int wid = 1000, hei = 500;
+GLfloat eyeX = 5.0f, eyeY = 5.0f, eyeZ = 5.0f;
+const float PI = 3.1415926;
 
 #define MAX_CHAR 128
 void drawString(const char* str, GLfloat x, GLfloat y, GLfloat z) {
-	//按x,y,z为起始位置，显示字符串str  
-	GLuint lists;
+	static GLuint lists;
 	lists = glGenLists(MAX_CHAR);
 	wglUseFontBitmaps(wglGetCurrentDC(), 0, MAX_CHAR, lists);
 	glListBase(lists);
-	//起始位置
 	glRasterPos3f(x, y, z);
 	glCallLists(strlen(str), GL_UNSIGNED_BYTE, str);
+	glDeleteLists(lists, MAX_CHAR);
 }
 
 void draw() {
-	glColor4f(0, 0.6, 1.0, 0.5);
+	glColor4f(1, 0, 0, 0);
 	drawString("x", -2, 0.1, 0);
-	glColor4f(1, 0.6, 0, 0.5);
+	glColor4f(0, 1, 0, 0);
 	drawString("y", 0.1, 2, 0);
-	glColor4f(0.6, 1, 0.6, 0.5);
+	glColor4f(0, 0, 1, 0);
 	drawString("z", 0.1, 0.1, 2);
+}
+
+void rotateX(float degree)
+{
+	degree *= PI / 180;
+	double tmp = eyeY * cos(degree) - eyeZ * sin(degree);
+	eyeZ = eyeY * sin(degree) + eyeZ * cos(degree);
+	eyeY = tmp;
+}
+
+void rotateY(float degree)
+{
+	degree *= PI / 180;
+	float tmp = eyeZ * sin(degree) + eyeX * cos(degree);
+	eyeZ = eyeZ * cos(degree) - eyeX * sin(degree);
+	eyeX = tmp;
 }
 
 void KeyPlot(int key, int x, int y) {
 	switch (key) {
 	case GLUT_KEY_UP: {
-		degree -= 1;
+		rotateX(1);
 		break;
 	}
 	case GLUT_KEY_DOWN: {
-		degree += 1;
+		rotateX(-1);
 		break;
 	}
 	case GLUT_KEY_LEFT: {
-		degreeY += 1;
+		rotateY(1);
 		break;
 	}
 	case GLUT_KEY_RIGHT: {
-		degreeY -= 1;
+		rotateY(-1);
 		break;
 	}
 	default: break;
@@ -74,49 +87,34 @@ void KeyPlot(int key, int x, int y) {
 	glutPostRedisplay();
 }
 
-float getX() {
-	return 6 * std::sin(degreeY / 180 * 3.1415926) * std::cos(degree/180*3.1415926);
-}
-
-float getY() {
-	return 6 * std::sin(degreeY / 180 * 3.1415926)*std::sin(degree / 180 * 3.1415926);
-}
-
-float getZ() {
-	return 6 * std::cos(degreeY / 180 * 3.1415926);
-}
-
 void triangle(GLsizei mode) {
 	float x;
-	if (wid > hei * 2) x = (float)(hei) / (float)(wid / 2);
-	else { x = (float)(wid / 2) / (float)(hei); }
+	if (wid > hei * 2) x = (float)(hei) / ((float)wid / 2.0);
+	else { x = ((float)wid / 2) / (float)(hei); }
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-3 * x, 3 * x, -3 * x, 3 * x, -20, 20);
-	if(mode==1) {
+	if (mode == 1) {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glMatrixMode(GL_MODELVIEW);
-		gluLookAt(0, 0, -7, 0, 0, 0, 0, 1, 0);
 		glPushMatrix();
 		glLoadIdentity();
-		//glRotatef(degree, 1, 0, 0);
-		//glRotatef(degreeY, 0, 1, 0);
+		switch (iMode) {
+		case 3: gluLookAt(0.0f, 0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f); break;
+		case 2: gluLookAt(5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f); break;
+		case 1: default: gluLookAt(0.0f, 5.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f);
+		}
 		glCallList(lineList);
 		glCallList(coordinate);
 		glPopMatrix();
-		//draw();
-	} else {
+	}
+	else {
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glMatrixMode(GL_PROJECTION);
-		//glLoadIdentity();
-		//gluPerspective(45, 1, 0, 20);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		gluLookAt(getX(), getY(), getZ(), 0, 0, 0, 0, 1, 0);
+		gluLookAt(eyeX, eyeY, eyeZ, 0, 0, 0, 0, 1, 0);
 		glPushMatrix();
-
-//		glRotatef(degree, 1, 0, 0);
-//		glRotatef(degreeY, 0, 1, 0);
 		glColor3f(0.0, 0.0, 0.0);
 		glEnable(GL_POLYGON_STIPPLE);
 		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
@@ -174,13 +172,13 @@ void Initial() {
 	coordinate = glGenLists(1);
 	glNewList(coordinate, GL_COMPILE);
 	glBegin(GL_LINES);
-	glColor4f(0, 0.6, 1.0, 0.5);
+	glColor4f(1, 0, 0, 0);
 	glVertex3f(-3, 0, 0);
 	glVertex3f(3, 0, 0);
-	glColor4f(1, 0.6, 0, 0.5);
+	glColor4f(0, 1, 0, 0);
 	glVertex3f(0, -3, 0);
 	glVertex3f(0, 3, 0);
-	glColor4f(0.6, 1, 0.6, 0.5);
+	glColor4f(0, 0, 1, 0);
 	glVertex3f(0, 0, 3);
 	glVertex3f(0, 0, -3);
 	glEnd();
@@ -188,16 +186,16 @@ void Initial() {
 }
 
 void changeSize(GLsizei w, GLsizei h) {
-	if (h == 0) h = 1;
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
+	wid = w;
+	hei = h;
 	glLoadIdentity();
-	if (w <= h)
-		gluOrtho2D(-2.5, 2.5, -3.0, 3.0*(GLfloat)h / (GLfloat)w);
-	else
-		gluOrtho2D(-2.5, 2.5*(GLfloat)w / (GLfloat)h, -3.0, 3.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	glutPostRedisplay();
+}
+
+void ProcessMenu(int value)
+{
+	iMode = value;
+	glutPostRedisplay();
 }
 
 int main(int argc, char* argv[])
@@ -210,12 +208,13 @@ int main(int argc, char* argv[])
 	glutReshapeFunc(changeSize);
 	glutDisplayFunc(display);
 	glutSpecialFunc(KeyPlot);
+	glutCreateMenu(ProcessMenu);
+	glutAddMenuEntry("正视图XOZ (V)", 1);
+	glutAddMenuEntry("侧视图YOZ (W)", 2);
+	glutAddMenuEntry("俯视图XOY (H)", 3);
+	glutAttachMenu(GLUT_RIGHT_BUTTON);
 	Initial();
-
 
 	glutMainLoop();
 	return 0;
 }
-
-
-
