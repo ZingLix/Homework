@@ -106,8 +106,8 @@ int main(int argc, char* argv[])
 	glutDisplayFunc(display);
 	glutCreateMenu(ProcessMenu);
 	glutAttachMenu(GLUT_RIGHT_BUTTON);
-	glutAddMenuEntry("Ïß¿ò", 1);
-	glutAddMenuEntry("Ìî³ä", 2);
+	glutAddMenuEntry("çº¿æ¡†", 1);
+	glutAddMenuEntry("å¡«å……", 2);
 	Initial();
 	
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
