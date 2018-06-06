@@ -25,11 +25,12 @@ public class MyTree<Value extends Comparable<Value>> implements Iterable<Value> 
             cur=header.left;
         }
         public Value next(){
+            Value tmp=cur.value;
             cur=cur.next;
-            return cur.value;
+            return tmp;
         }
         public boolean hasNext(){
-            return cur==header;
+            return cur!=header;
         }
         public void remove(){
 
@@ -64,7 +65,7 @@ public class MyTree<Value extends Comparable<Value>> implements Iterable<Value> 
     _tree_node predesssor(_tree_node node){
         if(node.left!=null) return max(node.left);
         _tree_node y=node.parent;
-        while(y!=header&&y.right==node){
+        while(y!=header&&y.left==node){
             node=y;
             y=y.parent;
         }
@@ -112,7 +113,47 @@ public class MyTree<Value extends Comparable<Value>> implements Iterable<Value> 
         return it;
     }
 
+    _tree_node leftmost(){
+        _tree_node it=root();
+        while(it!=null&&it.left!=null) it=it.left;
+        return it;
+    }
+
+    _tree_node rightmost(){
+        _tree_node it=root();
+        while(it!=null&&it.right!=null) it=it.right;
+        return it;
+    }
+
     void insert(Value val) {
+        _tree_node tmp = new _tree_node(val);
+        _tree_node it = root();
+        _tree_node it2 = header;
+        while (it != null) {
+            it2=it;
+            if (val.compareTo(it.value) <0){
+                it = it.left;
+            }else if(val.compareTo(it.value)>=0){
+                it=it.right;
+            }
+        }
+        if(it2==header){
+            header.parent=tmp;
+            header.left=tmp;
+            header.right=tmp;
+        }
+        else if(val.compareTo(it2.value)<0){
+            it2.left=tmp;
+        }else{
+            it2.right=tmp;
+        }
+        tmp.parent=it2;
+        if(tmp==leftmost()) header.left=tmp;
+        if(tmp==rightmost()) header.right=tmp;
+        update_link(tmp);
+    }
+
+    void insert_unique(Value val) {
         _tree_node tmp = new _tree_node(val);
         _tree_node it = root();
         _tree_node it2 = header;
@@ -122,6 +163,8 @@ public class MyTree<Value extends Comparable<Value>> implements Iterable<Value> 
                 it = it.left;
             }else if(val.compareTo(it.value)>0){
                 it=it.right;
+            }else {
+                return;
             }
         }
         if(it2==header){
@@ -129,12 +172,14 @@ public class MyTree<Value extends Comparable<Value>> implements Iterable<Value> 
             header.left=tmp;
             header.right=tmp;
         }
-        if(val.compareTo(it2.value)<0){
+        else if(val.compareTo(it2.value)<0){
             it2.left=tmp;
         }else{
             it2.right=tmp;
         }
         tmp.parent=it2;
+        if(tmp==leftmost()) header.left=tmp;
+        if(tmp==rightmost()) header.right=tmp;
         update_link(tmp);
     }
 
@@ -165,5 +210,7 @@ public class MyTree<Value extends Comparable<Value>> implements Iterable<Value> 
             next.prev=node.prev;
             node.prev.next=next;
         }
+        if(header.left==node) header.left=leftmost();
+        if(header.right==node) header.right=rightmost();
     }
 }
