@@ -86,7 +86,7 @@ public class Tree<Value extends Comparable<Value>> /*implements Iterable*/ {
     _tree_node predesssor(_tree_node node){
         if(node.left!=null) return max(node.left);
         _tree_node y=node.parent;
-        while(y!=null&&y.right==node){
+        while(y!=header&&y.right==node){
             node=y;
             y=y.parent;
         }
@@ -96,7 +96,7 @@ public class Tree<Value extends Comparable<Value>> /*implements Iterable*/ {
     _tree_node successor(_tree_node node){
         if(node.right!=null) return min(node.right);
         _tree_node y=node.parent;
-        while(y!=null&&y.right==node){
+        while(y!=header&&y.right==node){
             node=y;
             y=y.parent;
         }
@@ -119,20 +119,24 @@ public class Tree<Value extends Comparable<Value>> /*implements Iterable*/ {
 
     void remove(Value val){
         _tree_node node=get_node(val);
+        if(node==null) return;
         _tree_node next;
         if(node.left==null) next=node.right;
         else if(node.right==null) next=node.left;
         else next=successor(node);
         if(node==node.parent.left){
             node.parent.left=next;
-        }else{
-            node.parent.right=next;
+        }else {
+            node.parent.right = next;
         }
+        node.prev.next=next;
         if(next!=null){
             if(next.parent.left==next) next.parent.left=null;
             else next.parent.right=null;
             next.left=node.left;
             next.right=node.right;
+            next.prev=node.prev;
+
         }
     }
 
