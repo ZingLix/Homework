@@ -32,7 +32,7 @@
 
 # Experiment
 - [x] Exp1: P96 3.4 & 3.5
-- [ ] Exp2: implement a program to evaluate a infix expression
-- [ ] Exp3: P162   4.13
+- [x] Exp2: implement a program to evaluate a infix expression
+- [x] Exp3: P162   4.13
 - [ ] Exp4: P324 7.38
 - [ ] Exp5: P418 9.3
