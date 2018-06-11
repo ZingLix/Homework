@@ -1,11 +1,8 @@
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class Graph<T>  {
-    class Node{
+    class Node implements Comparable<Node>{
         T data;
         public LinkedList<Node> adj;
         int indegree;
@@ -13,6 +10,9 @@ public class Graph<T>  {
         Node(){
             adj=new LinkedList<Node>();
             indegree=0;
+        }
+        public int compareTo(Node n){
+            return topnumber-n.topnumber;
         }
     }
     ArrayList<Node> g;
@@ -33,11 +33,15 @@ public class Graph<T>  {
         }
     }
 
+    void setData(int i,T d){
+        g.get(i-1).data=d;
+    }
+
     void addline(int i,int j){
         g.get(i-1).adj.add(g.get(j-1));
     }
 
-    void topsort() /*throws Exception*/{
+    void topsort() throws Exception{
         updateIndegree();
         LinkedList<Node> list=new LinkedList<Node>();
         int counter=0;
@@ -57,7 +61,14 @@ public class Graph<T>  {
             }
 
         }
-        if(counter!=g.size()) return;
-        // throw new Exception();
+        if(counter!=g.size())
+            throw new Exception();
+    }
+
+    void print(){
+        Collections.sort(g);
+        for(int i=0;i<g.size();++i){
+            System.out.print(g.get(i).data+" ");
+        }
     }
 }
