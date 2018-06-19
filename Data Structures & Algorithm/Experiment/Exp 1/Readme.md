@@ -131,5 +131,5 @@ public static void main(String[] args) {
 
 运行结果：
 
-![](/img/1.png)
+![](/Homework/Data%20Structures%20%26%20Algorithm/Experiment/Exp%201/img/1.png)
 
