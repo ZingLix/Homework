@@ -1,8 +1,18 @@
+## 需求分析
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Stack;
+实现一个可以计算中缀表达式的计算器。
 
+## 相关知识和技术分析
+
+中缀和后缀表达式的转换，对后缀表达式的处理
+
+## 系统架构分析
+
+先将输入的字符串分割成数字与字符，将其转换成后缀表达式后，利用栈计算结果。
+
+## 功能模块设计
+
+``` java
 public class ExpressionProcessor {
     ExpressionProcessor(String str){
         experssion=str;
@@ -172,15 +182,21 @@ public class ExpressionProcessor {
                 return 3;
         }
     }
-    void print(){
-        while(!output.isEmpty()){
-            container c=output.peek();
-            if(c.is_number){
-                System.out.print(c.num);
-            }else {
-                System.out.print(c.ch);
-            }
-            output.remove();
-        }
-    }
 }
+```
+
+## 系统界面设计
+
+界面由两部分构成。上面一个输入框负责表达式的输入和结果的输出，下面的按钮用于输入字符。
+
+![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%202/img/1.png)
+
+## 系统测试
+
+利用按钮可以完成所有字符的输入。
+
+![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%202/img/2.png)
+
+按下等号按钮后可以产生正确结果。
+
+![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%202/img/3.png)
