@@ -8,7 +8,7 @@
 
 ## 3. 系统架构设计
 
-利用两个链表的迭代器，由于给定的链表元素是确定顺序的，所以迭代器每次增加得到的元素有序，那么只要两个迭代器依次迭代，每次使指向较小元素的迭代器增加，便可以确定顺序的方式遍历所有的元素。
+利用两个链表的迭代器，由于给定的链表元素是确定顺序的，所以迭代器每次增加得到的元素有序，那么只要两个迭代器，每次使指向较小元素的迭代器增加，便可以确定顺序的方式遍历所有的元素。
 
 从而，对于交集，如果两个迭代器所指相同，说明该元素两个链表中都有，加入到结果中。对于并集，因为是以有序的顺序遍历，那么相同的元素必定一同出现，只要判断结果中最后一个是否与现在的元素相同，就可确定该元素是否已加入到结果中。
 
@@ -26,20 +26,20 @@ public static<T extends Comparable<T>> LinkedList<T> intersection(LinkedList<T> 
     T cur1=it1.next(),cur2=it2.next();
     boolean flag=true;
     if(cur1.compareTo(cur2)>0){
-    flag=false;
+        flag=false;
     }else if(cur1.compareTo(cur2)==0){
-    result.add(cur1);
+        result.add(cur1);
     }
     while(it1.hasNext()&&it2.hasNext()){
-    if(flag) cur1 = it1.next();
-    else cur2 = it2.next();
-    if(cur1.compareTo(cur2)==0){
-        result.add(cur1);
-    }else if(cur1.compareTo(cur2)>0){
-        flag=false;
-    }else{
-        flag=true;
-    }
+        if(flag) cur1 = it1.next();
+        else cur2 = it2.next();
+        if(cur1.compareTo(cur2)==0){
+            result.add(cur1);
+        }else if(cur1.compareTo(cur2)>0){
+            flag=false;
+        }else{
+            flag=true;
+        }
     }
     return result;
 }
@@ -55,22 +55,22 @@ public static <T extends Comparable<T>> LinkedList<T> union(LinkedList<T> l1,Lin
     T cur1=it1.next(),cur2=it2.next();
     boolean flag=true;
     if(cur1.compareTo(cur2)>0){
-    flag=false;
+        flag=false;
     }
     result.add(cur1);
     while(it1.hasNext()||it2.hasNext()){
-    if(flag) cur1 = it1.next();
-    else cur2 = it2.next();
-    if(cur1.compareTo(cur2)==0){
-    }else if(cur1.compareTo(cur2)>0){
-        flag=false;
-        if(cur2!=result.getLast())
-        result.add(cur2);
-    }else{
-        flag=true;
-        if(cur1!=result.getLast())
-        result.add(cur1);
-    }
+        if(flag) cur1 = it1.next();
+        else cur2 = it2.next();
+        if(cur1.compareTo(cur2)==0){
+        }else if(cur1.compareTo(cur2)>0){
+            flag=false;
+            if(cur2!=result.getLast())
+                result.add(cur2);
+        }else{
+            flag=true;
+            if(cur1!=result.getLast())
+                result.add(cur1);
+        }
     }
     if(result.getLast()==cur1) result.add(cur2);
     else result.add(cur1);
@@ -80,7 +80,7 @@ public static <T extends Comparable<T>> LinkedList<T> union(LinkedList<T> l1,Lin
 
 ## 5. 系统界面设计
 
-？？？？没有界面
+以命令行的形式输出两个链表后，每行输出交集与并集的结果。
 
 ## 6. 系统测试
 
@@ -133,3 +133,6 @@ public static void main(String[] args) {
 
 ![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%201/img/1.png)
 
+## 7. 实验体会
+
+实验中给定的链表中元素是有序的，所以实现的算法效率较高。但如果输入的顺序不定，用更通用的算法，效率会有所降低。

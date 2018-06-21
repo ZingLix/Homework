@@ -1,16 +1,18 @@
-## 需求分析
+## 1.需求分析
 
 实现一个可以计算中缀表达式的计算器。
 
-## 相关知识和技术分析
+## 2.相关知识和技术分析
 
 中缀和后缀表达式的转换，对后缀表达式的处理
 
-## 系统架构分析
+## 3.系统架构分析
 
 先将输入的字符串分割成数字与字符，将其转换成后缀表达式后，利用栈计算结果。
 
-## 功能模块设计
+## 4.功能模块设计
+
+类中有一个数据成员 `experssion` 用于存储表达式，`infix_to_postfix()`将其转换成后缀表达式，`process()` 用于计算结果。
 
 ``` java
 public class ExpressionProcessor {
@@ -185,13 +187,13 @@ public class ExpressionProcessor {
 }
 ```
 
-## 系统界面设计
+## 5.系统界面设计
 
 界面由两部分构成。上面一个输入框负责表达式的输入和结果的输出，下面的按钮用于输入字符。
 
 ![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%202/img/1.png)
 
-## 系统测试
+## 6.系统测试
 
 利用按钮可以完成所有字符的输入。
 
@@ -200,3 +202,7 @@ public class ExpressionProcessor {
 按下等号按钮后可以产生正确结果。
 
 ![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%202/img/3.png)
+
+## 7.实验体会
+
+题目中只要求表达式中有括号和加减乘除五个运算符，相对较为简单。但当输入的运算符增多，对于各操作间优先级要求会变得更高，难度也会有所增加。

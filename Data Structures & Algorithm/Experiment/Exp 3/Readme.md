@@ -136,7 +136,7 @@ class TreeIterator implements Iterator<Value>{
 }
 
 public Iterator<Value> iterator(){
-        return new TreeIterator();
+    return new TreeIterator();
 }
 ```
 
@@ -167,7 +167,7 @@ public class TreeSet<Value extends Comparable<Value>> implements Iterable<Value>
 
 ## 5. 系统界面设计
 
-？？？？
+TreeSet 作为一个数据结构本身没有输出，测试时在命令行中打印出存入 TreeSet 的数据。
 
 ## 6. 系统测试
 
@@ -204,3 +204,7 @@ public static void main(String[] args) {
 测试结果：
 
 ![](https://github.com/ZingLix/Homework/blob/master/Data%20Structures%20%26%20Algorithm/Experiment/Exp%203/img/1.png)
+
+## 7.实验体会
+
+实验中用的二叉搜索树在部分场景下效率会降低，换用 AVL 树或者红黑树，可以避免极端情况的发生。
