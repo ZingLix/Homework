@@ -34,11 +34,11 @@ public class Graph<T>  {
     }
 
     void setData(int i,T d){
-        g.get(i).data=d;
+        g.get(i-1).data=d;
     }
 
     void addline(int i,int j){
-        g.get(i).adj.add(g.get(j));
+        g.get(i-1).adj.add(g.get(j-1));
     }
 
     void topsort() throws Exception{
