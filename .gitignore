@@ -303,3 +303,5 @@ fabric.properties
 
 *.out
 .vscode
+
+./Image Processing/*.jpg
