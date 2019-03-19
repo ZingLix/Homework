@@ -3,12 +3,14 @@
   "rules":{
     "object-literal-sort-keys": false
   },
-  "defaultSeverity": "warn",
+  "defaultSeverity": "none",
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
       "node_modules/**/*.ts",
-      "coverage/lcov-report/*.js"
+      "node_modules/**/*.js",
+      "coverage/lcov-report/*.js",
+      "src/*.tsx"
     ]
   }
 }
