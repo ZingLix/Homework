@@ -1,13 +1,11 @@
 package xyz.zinglix.mps;
 
-import java.text.FieldPosition;
-import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicLong;
 
 import java.text.DateFormat ;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.web.bind.annotation.*;
 
 class item implements Comparable<item>{
@@ -88,6 +86,24 @@ class item implements Comparable<item>{
     }
 }
 
+class Response{
+    Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Response() {
+    }
+
+    public Response(Long id) {
+        this.id = id;
+    }
+}
 
 @RestController
 public class API {
@@ -178,5 +194,67 @@ public class API {
             }
             i.newCount=need;
         }
+    }
+
+    @Autowired
+    OrderRepository order;
+
+    @GetMapping("/api/crm")
+    public List<Orders> orders(){
+        return order.findAll();
+    }
+
+    @RequestMapping("/api/crm/{id}")
+    public List<Long> crm(@PathVariable Long id){
+        List<Orders> orders=order.findAll();
+        Map<Long,Set<Long>> userorder=new HashMap<>();
+        for(var o:orders){
+            if(!userorder.containsKey(o.userId)){
+                userorder.put(o.userId,new HashSet<>());
+            }
+            userorder.get(o.userId).add(o.productId);
+        }
+        Map<Long,Long> map=new HashMap<>();
+        for(var p:userorder.values()){
+            for(var pid:p){
+                if(!map.containsKey(pid)) map.put(pid,0L);
+                map.put(pid,map.get(pid)+1);
+            }
+        }
+        var map_backup=map;
+        List<Long> toberemoved=new ArrayList<>();
+        for(var p:map.keySet()){
+            if((float)map.get(p)/userorder.size()<0.3){
+                toberemoved.add(p);
+            }
+        }
+        for(var p:toberemoved) map.remove(p);
+        Map<Pair<Long,Long>,Long> map2=new HashMap<>();
+        for(var p:map.keySet())
+            for(var q:map.keySet()){
+                if(p>=q) continue;
+                if(p!=id&&q!=id) continue;
+                Long count =0L;
+                for(var s:userorder.values()){
+                    if(s.contains(p)&&s.contains(q)) count++;
+                }
+                map2.put(Pair.of(p,q),count);
+            }
+//        List<Pair<Long,Long>> toberemoved2=new ArrayList<>();
+//        for(var p:map2.keySet()){
+//            if((float)map2.get(p)/userorder.size()<0.3)
+//                toberemoved2.add(p);
+//
+//            else if(p.getFirst()!=id&&p.getSecond()!=id)
+//                toberemoved2.add(p);
+//        }
+//        for(var p:toberemoved2) map2.remove(p);
+        List<Long> res=new ArrayList<>();
+        for(var m:map2.keySet()){
+            Long other=m.getFirst()==id?m.getSecond():m.getFirst();
+            Float interest= (float)map2.get(m)/(map.get(id)*map_backup.get(other))*userorder.size();
+            if(interest>1) res.add(other);
+        }
+        return res;
     }
 }

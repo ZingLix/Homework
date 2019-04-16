@@ -22,5 +22,9 @@
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
     "typescript": "^3.3.3333"
+  } , "proxy": {
+    "/api": {
+      "target": "http://127.0.0.1:8080"
+    }
   }
 }
