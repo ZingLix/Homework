@@ -35,7 +35,7 @@ class Crm extends React.Component {
     super(props);
     this.state = {
       order: [],
-      res: [],
+      res: {},
       num: 0
     };
   }
@@ -45,7 +45,9 @@ class Crm extends React.Component {
       productId: number;
       userId: number;
     }[];
-    res: number[];
+    res: {
+      [id: number]: number;
+    };
     num: number;
   };
 
@@ -86,6 +88,18 @@ class Crm extends React.Component {
       );
   }
 
+  interest = () => {
+    return (
+      <div>
+        {Object.keys(this.state.res).map(item => (
+          <div>
+            {this.map[item]}:{this.state.res[item]}
+          </div>
+        ))}
+      </div>
+    );
+  };
+
   recommend = () => {
     fetch("/api/crm/" + this.state.num)
       .then(r => r.json())
@@ -96,9 +110,13 @@ class Crm extends React.Component {
       );
   };
 
-  productList = (arr: number[]) => {
-    if (arr.length == 0) return "暂无推荐";
-    else return "推荐商品：" + arr.map(n => this.map[n] + " ");
+  productList = (arr: string[]) => {
+    var a = [];
+    for (var v of arr) {
+      if (this.state.res[v] > 1) a.push(v);
+    }
+    if (a.length == 0) return "暂无推荐";
+    else return "推荐商品：" + a.map(n => this.map[parseInt(n)]);
   };
 
   render() {
@@ -116,7 +134,8 @@ class Crm extends React.Component {
         >
           提交
         </Button>
-        {this.productList(this.state.res)}
+        {this.productList(Object.keys(this.state.res))}
+        {this.interest()}
         <Table
           columns={this.col}
           dataSource={this.state.order}

@@ -205,15 +205,17 @@ public class API {
     }
 
     @RequestMapping("/api/crm/{id}")
-    public List<Long> crm(@PathVariable Long id){
+    public Map<Long,Float> crm(@PathVariable Long id){
         List<Orders> orders=order.findAll();
         Map<Long,Set<Long>> userorder=new HashMap<>();
+        //过滤重复订单，得到每个用户购买过的商品列表
         for(var o:orders){
             if(!userorder.containsKey(o.userId)){
                 userorder.put(o.userId,new HashSet<>());
             }
             userorder.get(o.userId).add(o.productId);
         }
+        //计算每个商品有多少人买过
         Map<Long,Long> map=new HashMap<>();
         for(var p:userorder.values()){
             for(var pid:p){
@@ -222,6 +224,7 @@ public class API {
             }
         }
         var map_backup=map;
+        //移除支持度小于0.3的商品
         List<Long> toberemoved=new ArrayList<>();
         for(var p:map.keySet()){
             if((float)map.get(p)/userorder.size()<0.3){
@@ -229,31 +232,25 @@ public class API {
             }
         }
         for(var p:toberemoved) map.remove(p);
+        //两两商品计算支持度
         Map<Pair<Long,Long>,Long> map2=new HashMap<>();
-        for(var p:map.keySet())
-            for(var q:map.keySet()){
-                if(p>=q) continue;
-                if(p!=id&&q!=id) continue;
-                Long count =0L;
-                for(var s:userorder.values()){
-                    if(s.contains(p)&&s.contains(q)) count++;
+        for(var p:map.keySet()) {
+            for (var q : map.keySet()) {
+                if (p >= q) continue;
+                if (p != id && q != id) continue;
+                Long count = 0L;
+                for (var s : userorder.values()) {
+                    if (s.contains(p) && s.contains(q)) count++;
                 }
-                map2.put(Pair.of(p,q),count);
+                map2.put(Pair.of(p, q), count);
             }
-//        List<Pair<Long,Long>> toberemoved2=new ArrayList<>();
-//        for(var p:map2.keySet()){
-//            if((float)map2.get(p)/userorder.size()<0.3)
-//                toberemoved2.add(p);
-//
-//            else if(p.getFirst()!=id&&p.getSecond()!=id)
-//                toberemoved2.add(p);
-//        }
-//        for(var p:toberemoved2) map2.remove(p);
-        List<Long> res=new ArrayList<>();
+        }
+        //计算兴趣度
+        Map<Long,Float> res=new HashMap<>();
         for(var m:map2.keySet()){
             Long other=m.getFirst()==id?m.getSecond():m.getFirst();
             Float interest= (float)map2.get(m)/(map.get(id)*map_backup.get(other))*userorder.size();
-            if(interest>1) res.add(other);
+            res.put(other,interest);
         }
         return res;
     }
