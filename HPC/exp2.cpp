@@ -10,7 +10,7 @@ static long long num_steps = 400000000;
 void serial(){
 	double x, pi, sum = 0.0, step = 1.0/(double) num_steps;
 	clock_t start=clock();
-	for (long i = 1; i <= num_steps; i++){
+	for (long i = 0; i < num_steps; i++){
 		x = (i + 0.5)*step;
 		sum += 4.0/(1.0 + x*x);
 	}
