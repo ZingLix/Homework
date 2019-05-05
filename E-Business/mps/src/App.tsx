@@ -57,6 +57,12 @@ class Crm extends React.Component {
     3: "足球"
   };
 
+  map2 = {
+    1: "1.png",
+    2: "3.png",
+    3: "2.png"
+  };
+
   col = [
     {
       title: "序列号",
@@ -72,6 +78,16 @@ class Crm extends React.Component {
       title: "商品",
       render: (item: any) => {
         return <div>{this.map[item.productId]}</div>;
+      },
+
+      key: "productId"
+    },
+    {
+      title: "缩略图",
+      render: (item: any) => {
+        return (
+          <img src={this.map2[item.productId]} style={{ width: "100px" }} />
+        );
       },
 
       key: "productId"
